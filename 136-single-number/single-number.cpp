@@ -4,9 +4,17 @@ public:
         
     int xo = 0;
 
-    for(int i=0 ; i<nums.size() ;i++){
-        xo = xo ^ nums[i];
+    map<long long,int>m;
+    for(int i=0;i<nums.size();i++){
+        m[nums[i]]++;
     }
-    return xo;
+
+    for(auto it: m){
+        if(it.second==1){
+            return it.first;
+        }
+    }
+
+    return 0;
     }
 };
