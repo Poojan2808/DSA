@@ -22,7 +22,7 @@ public:
         }
     }
     bool isSymmetric(TreeNode* root) {
-        return (root == NULL || issym(root->left,root->right));
+        return (issym(root->left,root->right));
     }
 
 };
