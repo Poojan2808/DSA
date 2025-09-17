@@ -3,24 +3,38 @@ public:
     vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
 
         vector<int> ans;
-        for(int i=0;i<nums1.size();i++){
+        vector<int> res;
+        stack<int>s;
 
-            auto it=find(nums2.begin(),nums2.end(),nums1[i]);
-            int flag=0;
-
-            for(auto j=distance(nums2.begin(), it);j<nums2.size();j++){
-                if(nums2[j]>nums1[i]){
-                    ans.push_back(nums2[j]);
-                    flag=1;
-                    break;
-                }
+        for(int i=nums2.size()-1;i>=0;i--){
+           while (!s.empty() && s.top() <= nums2[i]) {
+                s.pop();
             }
-            if(flag==0){
+
+            // if stack empty => no greater element
+            if (s.empty()) {
                 ans.push_back(-1);
+            } else {
+                ans.push_back(s.top());
             }
+
+            // push current element
+            s.push(nums2[i]);
+        
+
 
         }
+         reverse(ans.begin(), ans.end());
+        int n = nums2.size();
+        for(int i=0;i<nums1.size();i++){
+             auto it = find(nums2.begin(), nums2.end(), nums1[i]);
+             int index = distance(nums2.begin(), it);
+             res.push_back(ans[index]);
 
-        return ans;
+
+        }
+         
+
+        return res;
     }
 };
